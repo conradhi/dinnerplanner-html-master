@@ -1,0 +1,34 @@
+body{
+	margin: 0;
+}
+
+
+header {
+	background: #888;
+	margin: 0;
+}
+
+header h1 {
+	margin: 0;
+	padding: 20px 0px;
+	text-align: center;
+}
+
+#leftContainer {
+	border-right: 2px solid black;
+	padding-right: 0px;
+}
+
+#infoTexts {
+	background: #777;
+	padding-right: 0;
+	margin: 0;
+}
+
+#cost {
+	text-align: right;
+}
+
+#searchArea {
+	border-bottom: 2px solid black;
+}
