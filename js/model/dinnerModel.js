@@ -21,7 +21,7 @@ var DinnerModel = function() {
 		var selectedDish = [];
 
 		for(key in menu){
-			var tempDish = this.getDish(key);
+			var tempDish = this.getDish(menu[key]);
 
 			if (tempDish.type === type) {
 				selectedDish = tempDish;
@@ -37,7 +37,7 @@ var DinnerModel = function() {
 		var tempDishes = [];
 
 		for(key in menu){
-			tempDishes.push(this.getDish(key));
+			tempDishes.push(this.getDish(menu[key]));
 		}
 
 		return tempDishes;
@@ -51,14 +51,14 @@ var DinnerModel = function() {
 		for(key in menu){
 
 			// gets all info about the dish
-			var tempDish = this.getDish(key);
+			var tempDish = this.getDish(menu[key]);
 
 			// ceates a list of the dishes ingredients
 			var tempIngList = tempDish.ingredients;
 
 			// gets every ingredient from the list and adds it to the list that is returned
 			for(ingredient in tempIngList){
-				ingredientsFinal.push(ingredient);
+				ingredientsFinal.push(tempIngList[ingredient]);
 			}
 		}
 
@@ -72,10 +72,27 @@ var DinnerModel = function() {
 		var tempIngList = this.getAllIngredients();
 
 		for(ingredient in tempIngList){
-			price += ingredient.price;
+			price += tempIngList[ingredient].price;
 		}
 
-		price *= getNumberOfGuests;
+		price *= this.getNumberOfGuests();
+
+		return price;
+	}
+
+	this.getTotalDishPrice = function (id) {
+
+		var price = 0;
+		// gets all info about the dish
+			var tempDish = this.getDish(id);
+
+			// ceates a list of the dishes ingredients
+			var tempIngList = tempDish.ingredients;
+
+		for(ingredient in tempIngList){
+
+			price += tempIngList[ingredient].price;
+		}
 
 		return price;
 	}
@@ -87,27 +104,32 @@ var DinnerModel = function() {
 
 		// get all info about the passed dish
 		var dishToBeAdded = this.getDish(id);
-		var menuWasChanged = false;
+		var tempMenu = [];
+		var typeSwapped = false;
 
 		// loop through menu 
 		for(key in menu){
 
-			// get all info about the looped menu item
-			var tempDish = this.getDish(key);
+			var tempDish = this.getDish(menu[key]);
 
-			// if the passed dish and the dish on the menu have the same type, change menu to passed dish
-			if (dishToBeAdded.type === tempDish.type) {
-				menu[key] = dishToBeAdded.id;
-				menuWasChanged = true;
+			// if dish types dont match add the current menu item to temp menu
+			if(tempDish.type !== dishToBeAdded.type){
+				tempMenu.push(tempDish.id);
 			}
 
+			// if dish types match, swap current menu item for new
+			if(tempDish.type === dishToBeAdded.type){
+				tempMenu.push(dishToBeAdded.id);
+				typeSwapped = true;
+			}
 		}
 
-		// if the men hasnt been changed after the loop we add the dish to the menu
-		if (!menuWasChanged){
-			menu.push(id);
+		// if nothing has been swapped add dish to menu
+		if (!typeSwapped) {
+			tempMenu.push(dishToBeAdded.id);
 		}
 
+		menu = tempMenu;
 
 	}
 
@@ -119,13 +141,14 @@ var DinnerModel = function() {
 		for (key in menu){
 
 			// if the menu item doesn't have the same id as the dish we want to remove, we add it to the new menu
-			if (key !== id) {
-				tempMenu.push(id);
+			if (menu[key] !== id) {
+				tempMenu.push(menu[key]);
 			}
 		}
 
 		menu = tempMenu;
 	}
+
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
