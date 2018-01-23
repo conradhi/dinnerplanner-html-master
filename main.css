@@ -36,6 +36,10 @@ header h1 {
 	padding-bottom: 20px;
 }
 
+#total {
+	border-left: 2px solid black
+}
+
 .btn-group{
 	margin-top: 10px;
 	margin-bottom: 10px;

@@ -10,17 +10,18 @@ var AllDishesView = function (container, model) {
 
 	for (key in allDishes) { 
 
-		allDishesHtml += "<div class='col-md-4'>" + 
-							"<div class='col-md-12 text-center'>" + 
-								"<img src='images/"+ allDishes[key].image + "'>" + 
+		allDishesHtml += "<div class='col-sm-4 col-12'>" + 
+							"<div class='col-12 text-center'>" + 
+								"<a href='foodInfo.html'>" + 
+									"<img src='images/"+ allDishes[key].image + "'>" +
+								"</a>" + 
 							"</div>" +
 
-							"<div class='col-md-12' style='text-align: center;'>" +
-								"<h3>" + allDishes[key].name + "<h3>" +
-							"</div>" +
-
-							"<div class='col-md-12' style='text-align: center;'>" +
-								"<h5>" + allDishes[key].description + "<h5>" +
+							"<div class='col-12' style='text-align: center;'>" +
+								
+									"<h3>" + allDishes[key].name + "<h3>" +
+								
+								//"<a class='btn btn-primary' href='foodInfo.html' role='button'>" + allDishes[key].name + "</a>" + 
 							"</div>" +
 						"</div>";
 

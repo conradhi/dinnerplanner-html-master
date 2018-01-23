@@ -11,8 +11,10 @@ $(function() {
     model.addDishToMenu("100");
     model.addDishToMenu("200");
 	// And create the instance of ExampleView
-	var viewNew = new ViewNew($("#viewNew"), model);
+	var navView = new NavView($("#navView"), model);
 	var allDishesView = new AllDishesView($("#allDishesView"), model);
+	var foodInfoView = new FoodInfoView($("#foodInfoView"), model);
+	var dinnerView = new DinnerView($("#dinnerView"), model);
 
 	/**
 	 * IMPORTANT: app.js is the only place where you are allowed to
