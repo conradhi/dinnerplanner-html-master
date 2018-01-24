@@ -15,6 +15,7 @@ $(function() {
 	var allDishesView = new AllDishesView($("#allDishesView"), model);
 	var foodInfoView = new FoodInfoView($("#foodInfoView"), model);
 	var dinnerView = new DinnerView($("#dinnerView"), model);
+	var printView = new PrintView($("#printView"), model);
 
 	/**
 	 * IMPORTANT: app.js is the only place where you are allowed to

@@ -24,6 +24,10 @@ header h1 {
 	background: #777;
 }
 
+#margin{
+	margin-top: 20px;
+}
+
 #cost {
 	text-align: right;
 	padding-right: 10px;
